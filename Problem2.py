@@ -10,8 +10,8 @@ with open("mnist.pkl", "rb") as f:
 x_train, y_train, x_test, y_test = mnist_data
 
 # Reduce dataset size for efficiency
-num_train = 60000  # Full training set
-num_test = 10000   # Full test set
+num_train = 60000 
+num_test = 10000 
 
 x_train = x_train[:num_train]
 y_train = y_train[:num_train]
@@ -21,16 +21,16 @@ y_test = y_test[:num_test]
 # One-hot encode labels
 encoder = OneHotEncoder(sparse_output=False)
 y_train_onehot = encoder.fit_transform(y_train.reshape(-1, 1))
-y_test_onehot = encoder.transform(y_test.reshape(-1, 1))  # Transform test labels with the same encoder
+y_test_onehot = encoder.transform(y_test.reshape(-1, 1)) 
 
 # Initialize random weights
 num_classes = 10
 num_features = x_train.shape[1]
-W = np.random.randn(num_features, num_classes) * 0.01  # Small random weights
+W = np.random.randn(num_features, num_classes) * 0.01
 
 # Softmax function
 def softmax(logits):
-    logits = np.array(logits)  # Ensure NumPy array
+    logits = np.array(logits)
     exp_logits = np.exp(logits - np.max(logits, axis=1, keepdims=True))
     return exp_logits / np.sum(exp_logits, axis=1, keepdims=True)
 
@@ -40,7 +40,7 @@ def cross_entropy_loss(y_pred, y_true):
 
 # Hyperparameters
 learning_rate = 0.1
-num_epochs = 100  # Train for 100 iterations
+num_epochs = 100 
 
 # Training loop using Gradient Descent
 for epoch in range(num_epochs):
